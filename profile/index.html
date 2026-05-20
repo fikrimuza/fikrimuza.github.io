@@ -1,0 +1,1117 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Portfolio — Web Developer & Pentester</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --bg: #080c10;
+                --surface: #0e1420;
+                --surface2: #131b2a;
+                --border: rgba(255, 255, 255, 0.07);
+                --border-glow: rgba(99, 179, 237, 0.25);
+                --accent: #63b3ed;
+                --accent2: #68d391;
+                --accent3: #fc8181;
+                --text: #e2e8f0;
+                --muted: #718096;
+                --dim: #4a5568;
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                background: var(--bg);
+                color: var(--text);
+                font-family: "Space Grotesk", sans-serif;
+                min-height: 100vh;
+                overflow-x: hidden;
+            }
+
+            /* noise overlay */
+            body::after {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+                pointer-events: none;
+                z-index: 999;
+                opacity: 0.4;
+            }
+
+            /* ── LAYOUT ── */
+            .page-wrapper {
+                display: grid;
+                grid-template-columns: 1fr 340px;
+                min-height: 100vh;
+            }
+
+            /* ── LEFT CONTENT ── */
+            .content {
+                padding: 4rem 3.5rem 4rem 5%;
+                border-right: 1px solid var(--border);
+                overflow-y: auto;
+            }
+
+            /* ── RIGHT SIDEBAR / PHOTO COL ── */
+            .sidebar {
+                position: sticky;
+                top: 0;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 3.5rem 2rem;
+                background: var(--surface);
+                border-left: 1px solid var(--border);
+                overflow-y: auto;
+            }
+
+            /* ── PHOTO FRAME ── */
+            .photo-frame {
+                width: 200px;
+                height: 200px;
+                border-radius: 20px;
+                position: relative;
+                margin-bottom: 1.8rem;
+                flex-shrink: 0;
+            }
+            .photo-frame::before {
+                content: "";
+                position: absolute;
+                inset: -2px;
+                border-radius: 22px;
+                background: linear-gradient(
+                    135deg,
+                    #63b3ed 0%,
+                    #68d391 50%,
+                    #63b3ed 100%
+                );
+                z-index: 0;
+                animation: spin 4s linear infinite;
+            }
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+            .photo-inner {
+                position: relative;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                border-radius: 19px;
+                background: var(--surface2);
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .photo-inner img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .photo-placeholder {
+                font-size: 4rem;
+                opacity: 0.3;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, #0e1420, #1a2a3a);
+                color: var(--accent);
+                font-family: "JetBrains Mono", monospace;
+                font-size: 1rem;
+                letter-spacing: 0.05em;
+                text-align: center;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            /* ── SIDEBAR INFO ── */
+            .sidebar-name {
+                font-size: 1.25rem;
+                font-weight: 700;
+                text-align: center;
+                letter-spacing: 0.01em;
+                color: #fff;
+                margin-bottom: 4px;
+            }
+            .sidebar-title {
+                font-size: 0.78rem;
+                color: var(--accent);
+                text-align: center;
+                font-family: "JetBrains Mono", monospace;
+                letter-spacing: 0.08em;
+                margin-bottom: 1.8rem;
+            }
+            .sidebar-divider {
+                width: 100%;
+                height: 1px;
+                background: var(--border);
+                margin: 1.4rem 0;
+            }
+            .status-badge {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                background: rgba(104, 211, 145, 0.08);
+                border: 1px solid rgba(104, 211, 145, 0.2);
+                border-radius: 999px;
+                padding: 6px 14px;
+                font-size: 0.75rem;
+                color: var(--accent2);
+                margin-bottom: 1.8rem;
+            }
+            .status-dot {
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: var(--accent2);
+                animation: pulse 2s infinite;
+            }
+            @keyframes pulse {
+                0%,
+                100% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                50% {
+                    opacity: 0.5;
+                    transform: scale(0.8);
+                }
+            }
+
+            /* SIDEBAR STATS */
+            .sidebar-stats {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                width: 100%;
+            }
+            .s-stat {
+                background: var(--bg);
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                padding: 0.9rem 0.7rem;
+                text-align: center;
+            }
+            .s-stat-num {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 1.4rem;
+                font-weight: 500;
+                color: var(--accent);
+                line-height: 1;
+                margin-bottom: 4px;
+            }
+            .s-stat-lbl {
+                font-size: 0.72rem;
+                color: var(--muted);
+                line-height: 1.3;
+            }
+
+            /* SIDEBAR LINKS */
+            .contact-links {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .c-link {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 0.65rem 0.9rem;
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                background: var(--bg);
+                color: var(--muted);
+                font-size: 0.82rem;
+                text-decoration: none;
+                transition: all 0.2s;
+            }
+            .c-link:hover {
+                border-color: var(--border-glow);
+                color: var(--accent);
+            }
+            .c-link .c-icon {
+                font-size: 1rem;
+                width: 20px;
+                text-align: center;
+            }
+
+            /* SKILL BARS sidebar */
+            .skill-mini {
+                margin-bottom: 10px;
+            }
+            .skill-mini-top {
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.75rem;
+                margin-bottom: 5px;
+            }
+            .skill-mini-top span:first-child {
+                color: var(--text);
+            }
+            .skill-mini-top span:last-child {
+                color: var(--muted);
+                font-family: "JetBrains Mono", monospace;
+            }
+            .bar-track {
+                height: 4px;
+                background: rgba(255, 255, 255, 0.06);
+                border-radius: 999px;
+                overflow: hidden;
+            }
+            .bar-fill {
+                height: 100%;
+                border-radius: 999px;
+                background: linear-gradient(
+                    90deg,
+                    var(--accent2),
+                    var(--accent)
+                );
+                transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            /* ── LEFT SIDE STYLES ── */
+            .hero-label {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.78rem;
+                color: var(--accent);
+                letter-spacing: 0.1em;
+                margin-bottom: 1.4rem;
+            }
+            .hero-label::before {
+                content: "//";
+                opacity: 0.4;
+            }
+            h1 {
+                font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+                font-weight: 700;
+                line-height: 1.08;
+                color: #fff;
+                letter-spacing: -0.02em;
+                margin-bottom: 0.5rem;
+            }
+            h1 .highlight {
+                background: linear-gradient(
+                    90deg,
+                    var(--accent),
+                    var(--accent2)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .tagline {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.88rem;
+                color: var(--muted);
+                margin-bottom: 1.8rem;
+            }
+            .tagline span {
+                color: var(--accent2);
+            }
+            .bio {
+                font-size: 1rem;
+                color: #94a3b8;
+                line-height: 1.9;
+                max-width: 560px;
+                margin-bottom: 3rem;
+            }
+            .bio strong {
+                color: var(--text);
+                font-weight: 500;
+            }
+
+            /* SECTION HEADERS */
+            .sec-header {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 2rem;
+            }
+            .sec-line {
+                flex: 1;
+                height: 1px;
+                background: var(--border);
+            }
+            .sec-title {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.72rem;
+                color: var(--accent);
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                white-space: nowrap;
+            }
+            .section {
+                margin-bottom: 4rem;
+            }
+
+            /* SKILL CARDS */
+            .skill-cols {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.2rem;
+            }
+            .skill-col-card {
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                padding: 1.8rem;
+                position: relative;
+                overflow: hidden;
+            }
+            .skill-col-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background: var(--col-accent, var(--accent));
+            }
+            .skill-col-card h3 {
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: var(--col-accent, var(--accent));
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                margin-bottom: 1.2rem;
+            }
+            .skill-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 0.55rem 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+                font-size: 0.88rem;
+                color: var(--text);
+            }
+            .skill-item:last-child {
+                border: none;
+            }
+            .skill-item .badge {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.68rem;
+                padding: 2px 8px;
+                border-radius: 4px;
+                margin-left: auto;
+                font-weight: 500;
+            }
+            .badge-adv {
+                background: rgba(99, 179, 237, 0.12);
+                color: var(--accent);
+            }
+            .badge-mid {
+                background: rgba(104, 211, 145, 0.12);
+                color: var(--accent2);
+            }
+            .badge-exp {
+                background: rgba(252, 129, 129, 0.12);
+                color: var(--accent3);
+            }
+
+            /* PROJECTS */
+            .proj-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+            .proj-card {
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                padding: 1.6rem 1.8rem;
+                display: grid;
+                grid-template-columns: auto 1fr auto;
+                gap: 1.2rem;
+                align-items: start;
+                transition:
+                    border-color 0.25s,
+                    background 0.25s;
+                cursor: default;
+            }
+            .proj-card:hover {
+                border-color: var(--border-glow);
+                background: var(--surface2);
+            }
+            .proj-num {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.72rem;
+                color: var(--dim);
+                margin-top: 3px;
+            }
+            .proj-body h4 {
+                font-size: 1rem;
+                font-weight: 600;
+                color: #fff;
+                margin-bottom: 5px;
+            }
+            .proj-body p {
+                font-size: 0.87rem;
+                color: #64748b;
+                line-height: 1.6;
+            }
+            .proj-tags {
+                display: flex;
+                gap: 6px;
+                flex-wrap: wrap;
+                margin-top: 10px;
+            }
+            .ptag {
+                font-size: 0.72rem;
+                padding: 3px 9px;
+                border-radius: 5px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                color: var(--muted);
+                font-family: "JetBrains Mono", monospace;
+            }
+            .proj-status {
+                font-size: 0.7rem;
+                padding: 4px 10px;
+                border-radius: 6px;
+                white-space: nowrap;
+                font-family: "JetBrains Mono", monospace;
+            }
+            .ps-done {
+                background: rgba(104, 211, 145, 0.1);
+                color: var(--accent2);
+                border: 1px solid rgba(104, 211, 145, 0.2);
+            }
+            .ps-active {
+                background: rgba(99, 179, 237, 0.1);
+                color: var(--accent);
+                border: 1px solid rgba(99, 179, 237, 0.2);
+            }
+            .ps-sec {
+                background: rgba(252, 129, 129, 0.1);
+                color: var(--accent3);
+                border: 1px solid rgba(252, 129, 129, 0.2);
+            }
+
+            /* CERT / EDU */
+            .cert-list {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .cert-item {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                padding: 1rem 1.4rem;
+            }
+            .cert-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                flex-shrink: 0;
+            }
+            .cert-body {
+                flex: 1;
+            }
+            .cert-body h5 {
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: #fff;
+                margin-bottom: 2px;
+            }
+            .cert-body p {
+                font-size: 0.78rem;
+                color: var(--muted);
+            }
+            .cert-year {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.72rem;
+                color: var(--dim);
+            }
+
+            /* FOOTER */
+            .page-footer {
+                padding: 2rem 0;
+                border-top: 1px solid var(--border);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .page-footer p {
+                font-size: 0.8rem;
+                color: var(--dim);
+            }
+
+            /* RESPONSIVE */
+            @media (max-width: 900px) {
+                .page-wrapper {
+                    grid-template-columns: 1fr;
+                    grid-template-rows: auto auto;
+                }
+                .sidebar {
+                    position: relative;
+                    height: auto;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    border-left: none;
+                    border-top: 1px solid var(--border);
+                }
+                .skill-cols {
+                    grid-template-columns: 1fr;
+                }
+                .content {
+                    padding: 3rem 5%;
+                }
+            }
+            @media (max-width: 600px) {
+                .proj-card {
+                    grid-template-columns: 1fr;
+                    gap: 0.8rem;
+                }
+                .proj-num {
+                    display: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page-wrapper">
+            <!-- ══════════════ LEFT CONTENT ══════════════ -->
+            <main class="content">
+                <!-- HERO -->
+                <div class="section" style="margin-bottom: 3.5rem">
+                    <div class="hero-label">portfolio.profile</div>
+                    <h1>
+                        Web Developer<br />&amp;
+                        <span class="highlight">Penetration Tester</span>
+                    </h1>
+                    <div class="tagline">
+                        &gt; <span>Insan Nusantara Teknik</span> / Full-Stack
+                        &amp; Security Specialist
+                    </div>
+                    <p class="bio">
+                        Saya seorang <strong>pengembang web</strong> dan
+                        <strong>penetration tester</strong> dengan pendekatan
+                        yang menggabungkan sisi kreatif pembangunan sistem dan
+                        sisi kritis evaluasi keamanannya. Saya percaya software
+                        yang baik adalah software yang tidak hanya berfungsi,
+                        tapi juga <strong>aman dari ancaman siber</strong>.
+                    </p>
+                </div>
+
+                <!-- KEAHLIAN -->
+                <div class="section">
+                    <div class="sec-header">
+                        <span class="sec-title">// keahlian teknis</span>
+                        <div class="sec-line"></div>
+                    </div>
+                    <div class="skill-cols">
+                        <div
+                            class="skill-col-card"
+                            style="--col-accent: #63b3ed"
+                        >
+                            <h3>⌨ Web Development</h3>
+                            <div class="skill-item">
+                                HTML / CSS / JavaScript<span
+                                    class="badge badge-adv"
+                                    >Advanced</span
+                                >
+                            </div>
+                            <div class="skill-item">
+                                React / Next.js<span class="badge badge-adv"
+                                    >Advanced</span
+                                >
+                            </div>
+                            <div class="skill-item">
+                                Node.js / Express<span class="badge badge-mid"
+                                    >Intermediate</span
+                                >
+                            </div>
+                            <div class="skill-item">
+                                PHP / Laravel<span class="badge badge-mid"
+                                    >Intermediate</span
+                                >
+                            </div>
+                            <div class="skill-item">
+                                MySQL / PostgreSQL<span class="badge badge-mid"
+                                    >Intermediate</span
+                                >
+                            </div>
+                            <div class="skill-item">
+                                REST API / GraphQL<span class="badge badge-adv"
+                                    >Advanced</span
+                                >
+                            </div>
+                            <div class="skill-item">
+                                Docker / Linux Server<span
+                                    class="badge badge-mid"
+                                    >Intermediate</span
+                                >
+                            </div>
+                        </div>
+                        <div
+                            class="skill-col-card"
+                            style="--col-accent: #fc8181"
+                        >
+                            <h3>🛡 Penetration Testing</h3>
+                            <div class="skill-item">
+                                Web App Pentest<span class="badge badge-exp"
+                                    >Expert</span
+                                >
+                            </div>
+                            <div class="skill-item">
+                                Network Scanning<span class="badge badge-adv"
+                                    >Advanced</span
+                                >
+                            </div>
+                            <div class="skill-item">
+                                OWASP Top 10<span class="badge badge-exp"
+                                    >Expert</span
+                                >
+                            </div>
+                            <div class="skill-item">
+                                Burp Suite / ZAP<span class="badge badge-adv"
+                                    >Advanced</span
+                                >
+                            </div>
+                            <div class="skill-item">
+                                Metasploit / Nmap<span class="badge badge-adv"
+                                    >Advanced</span
+                                >
+                            </div>
+                            <div class="skill-item">
+                                SQLi / XSS / CSRF<span class="badge badge-exp"
+                                    >Expert</span
+                                >
+                            </div>
+                            <div class="skill-item">
+                                Vulnerability Report<span
+                                    class="badge badge-adv"
+                                    >Advanced</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROYEK -->
+                <div class="section">
+                    <div class="sec-header">
+                        <span class="sec-title">// portofolio proyek</span>
+                        <div class="sec-line"></div>
+                    </div>
+                    <div class="proj-grid">
+                        <div class="proj-card">
+                            <div class="proj-num">01</div>
+                            <div class="proj-body">
+                                <h4>
+                                    Sistem Manajemen Inventaris — CV Mitra Jaya
+                                </h4>
+                                <p>
+                                    Aplikasi web full-stack untuk manajemen
+                                    stok, laporan real-time, dan notifikasi
+                                    otomatis via WhatsApp API. Digunakan oleh 3
+                                    cabang sekaligus.
+                                </p>
+                                <div class="proj-tags">
+                                    <span class="ptag">Next.js</span
+                                    ><span class="ptag">Laravel</span
+                                    ><span class="ptag">MySQL</span
+                                    ><span class="ptag">WA API</span>
+                                </div>
+                            </div>
+                            <div class="proj-status ps-done">Selesai</div>
+                        </div>
+
+                        <div class="proj-card">
+                            <div class="proj-num">02</div>
+                            <div class="proj-body">
+                                <h4>
+                                    Security Audit — Platform E-Commerce Lokal
+                                </h4>
+                                <p>
+                                    Audit keamanan menyeluruh pada platform
+                                    belanja online skala UMKM. Ditemukan 12
+                                    kerentanan kritis termasuk SQL Injection dan
+                                    IDOR, semua berhasil diperbaiki.
+                                </p>
+                                <div class="proj-tags">
+                                    <span class="ptag">Burp Suite</span
+                                    ><span class="ptag">OWASP</span
+                                    ><span class="ptag">SQLi</span
+                                    ><span class="ptag">IDOR</span>
+                                </div>
+                            </div>
+                            <div class="proj-status ps-sec">Security</div>
+                        </div>
+
+                        <div class="proj-card">
+                            <div class="proj-num">03</div>
+                            <div class="proj-body">
+                                <h4>
+                                    Company Profile &amp; CMS — PT. Insan
+                                    Nusantara Teknik
+                                </h4>
+                                <p>
+                                    Website company profile modern dengan CMS
+                                    custom berbasis React + Headless CMS.
+                                    SEO-optimized, mobile-first, dengan
+                                    dashboard admin yang intuitif.
+                                </p>
+                                <div class="proj-tags">
+                                    <span class="ptag">React</span
+                                    ><span class="ptag">Strapi</span
+                                    ><span class="ptag">Tailwind</span
+                                    ><span class="ptag">SEO</span>
+                                </div>
+                            </div>
+                            <div class="proj-status ps-active">Live</div>
+                        </div>
+
+                        <div class="proj-card">
+                            <div class="proj-num">04</div>
+                            <div class="proj-body">
+                                <h4>
+                                    Network Pentest — Infrastruktur Perkantoran
+                                </h4>
+                                <p>
+                                    Penetration testing jaringan internal kantor
+                                    80+ endpoint. Identifikasi misconfiguration
+                                    firewall dan weak credential policy,
+                                    disertai laporan remediasi lengkap.
+                                </p>
+                                <div class="proj-tags">
+                                    <span class="ptag">Nmap</span
+                                    ><span class="ptag">Metasploit</span
+                                    ><span class="ptag">Nessus</span
+                                    ><span class="ptag">Report</span>
+                                </div>
+                            </div>
+                            <div class="proj-status ps-done">Selesai</div>
+                        </div>
+
+                        <div class="proj-card">
+                            <div class="proj-num">05</div>
+                            <div class="proj-body">
+                                <h4>IoT Dashboard — Smart Monitoring Gedung</h4>
+                                <p>
+                                    Dashboard real-time untuk monitoring suhu,
+                                    kelembaban, dan konsumsi daya listrik gedung
+                                    perkantoran via protokol MQTT dan sensor
+                                    NodeMCU.
+                                </p>
+                                <div class="proj-tags">
+                                    <span class="ptag">React</span
+                                    ><span class="ptag">MQTT</span
+                                    ><span class="ptag">Node.js</span
+                                    ><span class="ptag">NodeMCU</span>
+                                </div>
+                            </div>
+                            <div class="proj-status ps-active">Live</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SERTIFIKASI -->
+                <div class="section">
+                    <div class="sec-header">
+                        <span class="sec-title"
+                            >// sertifikasi &amp; pendidikan</span
+                        >
+                        <div class="sec-line"></div>
+                    </div>
+                    <div class="cert-list">
+                        <div class="cert-item">
+                            <div
+                                class="cert-icon"
+                                style="background: rgba(252, 129, 129, 0.1)"
+                            >
+                                🏆
+                            </div>
+                            <div class="cert-body">
+                                <h5>Certified Ethical Hacker (CEH)</h5>
+                                <p>EC-Council — International Certification</p>
+                            </div>
+                            <div class="cert-year">2023</div>
+                        </div>
+                        <div class="cert-item">
+                            <div
+                                class="cert-icon"
+                                style="background: rgba(99, 179, 237, 0.1)"
+                            >
+                                🎓
+                            </div>
+                            <div class="cert-body">
+                                <h5>S1 Teknik Informatika</h5>
+                                <p>Universitas — Jawa Tengah</p>
+                            </div>
+                            <div class="cert-year">2021</div>
+                        </div>
+                        <div class="cert-item">
+                            <div
+                                class="cert-icon"
+                                style="background: rgba(104, 211, 145, 0.1)"
+                            >
+                                📜
+                            </div>
+                            <div class="cert-body">
+                                <h5>BNSP — Programmer</h5>
+                                <p>Badan Nasional Sertifikasi Profesi</p>
+                            </div>
+                            <div class="cert-year">2022</div>
+                        </div>
+                        <div class="cert-item">
+                            <div
+                                class="cert-icon"
+                                style="background: rgba(246, 173, 85, 0.1)"
+                            >
+                                ⚡
+                            </div>
+                            <div class="cert-body">
+                                <h5>Google Cybersecurity Certificate</h5>
+                                <p>Google Career Certificates — Coursera</p>
+                            </div>
+                            <div class="cert-year">2024</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-footer">
+                    <p>© 2025 — Insan Nusantara Teknik</p>
+                    <p
+                        style="
+                            font-family: &quot;JetBrains Mono&quot;, monospace;
+                            font-size: 0.75rem;
+                            color: var(--dim);
+                        "
+                    >
+                        // available for freelance &amp; contract
+                    </p>
+                </div>
+            </main>
+
+            <!-- ══════════════ RIGHT SIDEBAR ══════════════ -->
+            <aside class="sidebar">
+                <!-- FOTO -->
+                <div class="photo-frame">
+                    <div class="photo-inner">
+                        <div class="photo-placeholder">
+                            <svg
+                                width="56"
+                                height="56"
+                                viewBox="0 0 56 56"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <circle
+                                    cx="28"
+                                    cy="20"
+                                    r="12"
+                                    fill="rgba(99,179,237,0.3)"
+                                />
+                                <path
+                                    d="M4 48c0-13.3 10.7-24 24-24s24 10.7 24 24"
+                                    fill="rgba(99,179,237,0.15)"
+                                />
+                            </svg>
+                            <span
+                                style="
+                                    font-size: 0.7rem;
+                                    opacity: 0.5;
+                                    margin-top: 8px;
+                                "
+                                >Upload Foto</span
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-name">Nama Anda</div>
+                <div class="sidebar-title">web_dev &amp; pen_tester</div>
+
+                <div class="status-badge">
+                    <div class="status-dot"></div>
+                    Tersedia untuk Proyek
+                </div>
+
+                <!-- STATS -->
+                <div class="sidebar-stats">
+                    <div class="s-stat">
+                        <div class="s-stat-num">50+</div>
+                        <div class="s-stat-lbl">Proyek<br />Selesai</div>
+                    </div>
+                    <div class="s-stat">
+                        <div class="s-stat-num">5+</div>
+                        <div class="s-stat-lbl">Tahun<br />Pengalaman</div>
+                    </div>
+                    <div class="s-stat">
+                        <div class="s-stat-num">40+</div>
+                        <div class="s-stat-lbl">Klien<br />Puas</div>
+                    </div>
+                    <div class="s-stat">
+                        <div class="s-stat-num">12+</div>
+                        <div class="s-stat-lbl">CVE<br />Ditemukan</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-divider"></div>
+
+                <!-- PROFICIENCY -->
+                <div style="width: 100%; margin-bottom: 0.5rem">
+                    <p
+                        style="
+                            font-family: &quot;JetBrains Mono&quot;, monospace;
+                            font-size: 0.7rem;
+                            color: var(--muted);
+                            letter-spacing: 0.1em;
+                            text-transform: uppercase;
+                            margin-bottom: 1rem;
+                        "
+                    >
+                        // proficiency
+                    </p>
+                    <div class="skill-mini">
+                        <div class="skill-mini-top">
+                            <span>Web Development</span><span>92%</span>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-mini">
+                        <div class="skill-mini-top">
+                            <span>Penetration Testing</span><span>88%</span>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-mini">
+                        <div class="skill-mini-top">
+                            <span>Network Security</span><span>80%</span>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-mini">
+                        <div class="skill-mini-top">
+                            <span>IoT & Embedded</span><span>72%</span>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 72%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-divider"></div>
+
+                <!-- KONTAK LINKS -->
+                <div class="contact-links" style="width: 100%">
+                    <p
+                        style="
+                            font-family: &quot;JetBrains Mono&quot;, monospace;
+                            font-size: 0.7rem;
+                            color: var(--muted);
+                            letter-spacing: 0.1em;
+                            text-transform: uppercase;
+                            margin-bottom: 0.5rem;
+                        "
+                    >
+                        // kontak
+                    </p>
+                    <a class="c-link" href="#">
+                        <span class="c-icon">📱</span>+62 xxx-xxxx-xxxx
+                    </a>
+                    <a class="c-link" href="#">
+                        <span class="c-icon">✉️</span>email@anda.com
+                    </a>
+                    <a class="c-link" href="#">
+                        <span class="c-icon">🔗</span>linkedin.com/in/nama
+                    </a>
+                    <a class="c-link" href="#">
+                        <span class="c-icon">💻</span>github.com/username
+                    </a>
+                    <a class="c-link" href="#">
+                        <span class="c-icon">📍</span>Semarang, Jawa Tengah
+                    </a>
+                </div>
+
+                <div class="sidebar-divider"></div>
+
+                <!-- LANGUAGE -->
+                <div style="width: 100%">
+                    <p
+                        style="
+                            font-family: &quot;JetBrains Mono&quot;, monospace;
+                            font-size: 0.7rem;
+                            color: var(--muted);
+                            letter-spacing: 0.1em;
+                            text-transform: uppercase;
+                            margin-bottom: 1rem;
+                        "
+                    >
+                        // bahasa
+                    </p>
+                    <div class="skill-mini">
+                        <div class="skill-mini-top">
+                            <span>Bahasa Indonesia</span><span>Native</span>
+                        </div>
+                        <div class="bar-track">
+                            <div
+                                class="bar-fill"
+                                style="width: 100%; background: var(--accent2)"
+                            ></div>
+                        </div>
+                    </div>
+                    <div class="skill-mini">
+                        <div class="skill-mini-top">
+                            <span>English</span><span>Professional</span>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 78%"></div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <script>
+            // Animate bars on load
+            window.addEventListener("load", () => {
+                document.querySelectorAll(".bar-fill").forEach((b) => {
+                    const w = b.style.width;
+                    b.style.width = "0%";
+                    requestAnimationFrame(() => {
+                        setTimeout(() => {
+                            b.style.width = w;
+                        }, 200);
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

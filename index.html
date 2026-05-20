@@ -1,0 +1,1171 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Insan Nusantara Teknik — Company Profile</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --navy: #0a1628;
+                --navy-mid: #102040;
+                --navy-light: #1a3355;
+                --accent: #00c9a7;
+                --accent2: #0ea5e9;
+                --accent3: #f59e0b;
+                --text-primary: #e8f0fe;
+                --text-secondary: #94afc8;
+                --text-muted: #556b82;
+                --card-bg: rgba(16, 32, 64, 0.7);
+                --border: rgba(0, 201, 167, 0.15);
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                background: var(--navy);
+                color: var(--text-primary);
+                font-family: "DM Sans", sans-serif;
+                font-size: 16px;
+                line-height: 1.7;
+                overflow-x: hidden;
+            }
+
+            /* ─── BG GRID ─── */
+            body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background-image:
+                    linear-gradient(
+                        rgba(0, 201, 167, 0.04) 1px,
+                        transparent 1px
+                    ),
+                    linear-gradient(
+                        90deg,
+                        rgba(0, 201, 167, 0.04) 1px,
+                        transparent 1px
+                    );
+                background-size: 60px 60px;
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            /* ─── NAV ─── */
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1.2rem 6%;
+                background: rgba(10, 22, 40, 0.92);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid var(--border);
+            }
+            .nav-logo {
+                font-family: "Syne", sans-serif;
+                font-size: 1.1rem;
+                font-weight: 800;
+                letter-spacing: 0.02em;
+                color: var(--text-primary);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .nav-logo .dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: var(--accent);
+                display: inline-block;
+            }
+            .nav-links {
+                display: flex;
+                gap: 2rem;
+                list-style: none;
+            }
+            .nav-links a {
+                color: var(--text-secondary);
+                text-decoration: none;
+                font-size: 0.9rem;
+                font-weight: 500;
+                transition: color 0.2s;
+            }
+            .nav-links a:hover {
+                color: var(--accent);
+            }
+
+            /* ─── HERO ─── */
+            .hero {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                padding: 0 6%;
+                padding-top: 100px;
+                position: relative;
+                overflow: hidden;
+            }
+            .hero-orb {
+                position: absolute;
+                border-radius: 50%;
+                filter: blur(80px);
+                pointer-events: none;
+            }
+            .orb1 {
+                width: 500px;
+                height: 500px;
+                background: rgba(0, 201, 167, 0.12);
+                right: -100px;
+                top: 10%;
+            }
+            .orb2 {
+                width: 350px;
+                height: 350px;
+                background: rgba(14, 165, 233, 0.1);
+                left: -50px;
+                bottom: 10%;
+            }
+            .hero-content {
+                position: relative;
+                z-index: 1;
+                max-width: 680px;
+            }
+            .hero-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: rgba(0, 201, 167, 0.1);
+                border: 1px solid rgba(0, 201, 167, 0.3);
+                color: var(--accent);
+                font-size: 0.8rem;
+                font-weight: 500;
+                letter-spacing: 0.08em;
+                padding: 6px 14px;
+                border-radius: 999px;
+                margin-bottom: 2rem;
+                text-transform: uppercase;
+            }
+            .hero-badge::before {
+                content: "";
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--accent);
+                animation: pulse 2s infinite;
+            }
+            @keyframes pulse {
+                0%,
+                100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.3;
+                }
+            }
+            h1 {
+                font-family: "Syne", sans-serif;
+                font-size: clamp(2.8rem, 6vw, 5rem);
+                font-weight: 800;
+                line-height: 1.05;
+                color: #fff;
+                margin-bottom: 1.5rem;
+            }
+            h1 span {
+                color: var(--accent);
+            }
+            .hero-sub {
+                font-size: 1.1rem;
+                color: var(--text-secondary);
+                max-width: 520px;
+                margin-bottom: 2.5rem;
+                line-height: 1.8;
+            }
+            .hero-cta {
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+            .btn-primary {
+                background: var(--accent);
+                color: var(--navy);
+                padding: 0.85rem 2rem;
+                border-radius: 8px;
+                font-weight: 600;
+                font-size: 0.95rem;
+                text-decoration: none;
+                transition: all 0.2s;
+                letter-spacing: 0.01em;
+            }
+            .btn-primary:hover {
+                background: #00e6bf;
+                transform: translateY(-2px);
+            }
+            .btn-outline {
+                border: 1px solid var(--border);
+                color: var(--text-secondary);
+                padding: 0.85rem 2rem;
+                border-radius: 8px;
+                font-weight: 500;
+                font-size: 0.95rem;
+                text-decoration: none;
+                transition: all 0.2s;
+            }
+            .btn-outline:hover {
+                border-color: var(--accent);
+                color: var(--accent);
+            }
+            .hero-stats {
+                position: absolute;
+                right: 6%;
+                bottom: 12%;
+                display: flex;
+                gap: 3rem;
+                z-index: 1;
+            }
+            .stat-item {
+                text-align: right;
+            }
+            .stat-num {
+                font-family: "Syne", sans-serif;
+                font-size: 2.5rem;
+                font-weight: 800;
+                color: var(--accent);
+                line-height: 1;
+            }
+            .stat-label {
+                font-size: 0.8rem;
+                color: var(--text-muted);
+                margin-top: 4px;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+
+            /* ─── SECTIONS ─── */
+            section {
+                padding: 6rem 6%;
+                position: relative;
+                z-index: 1;
+            }
+            .section-tag {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                color: var(--accent);
+                font-size: 0.78rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+                margin-bottom: 1rem;
+            }
+            .section-tag::before {
+                content: "";
+                width: 24px;
+                height: 2px;
+                background: var(--accent);
+            }
+            h2 {
+                font-family: "Syne", sans-serif;
+                font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+                font-weight: 700;
+                color: #fff;
+                line-height: 1.15;
+                margin-bottom: 1.2rem;
+            }
+            .section-sub {
+                color: var(--text-secondary);
+                max-width: 580px;
+                font-size: 1.05rem;
+            }
+
+            /* ─── SERVICES ─── */
+            .services-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 1.5rem;
+                margin-top: 3.5rem;
+            }
+            .service-card {
+                background: var(--card-bg);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                padding: 2rem;
+                transition: all 0.3s;
+                position: relative;
+                overflow: hidden;
+            }
+            .service-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 3px;
+                background: var(--card-accent, var(--accent));
+            }
+            .service-card:hover {
+                border-color: rgba(0, 201, 167, 0.3);
+                transform: translateY(-4px);
+                background: rgba(16, 32, 64, 0.9);
+            }
+            .service-icon {
+                width: 52px;
+                height: 52px;
+                border-radius: 12px;
+                background: rgba(0, 201, 167, 0.1);
+                border: 1px solid rgba(0, 201, 167, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 1.4rem;
+                font-size: 1.5rem;
+            }
+            .service-card h3 {
+                font-family: "Syne", sans-serif;
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: #fff;
+                margin-bottom: 0.6rem;
+            }
+            .service-card p {
+                color: var(--text-secondary);
+                font-size: 0.9rem;
+                line-height: 1.7;
+            }
+            .service-tags {
+                display: flex;
+                gap: 6px;
+                flex-wrap: wrap;
+                margin-top: 1.2rem;
+            }
+            .tag {
+                font-size: 0.75rem;
+                padding: 3px 10px;
+                border-radius: 999px;
+                background: rgba(0, 201, 167, 0.08);
+                border: 1px solid rgba(0, 201, 167, 0.15);
+                color: var(--accent);
+            }
+
+            /* ─── ABOUT ─── */
+            .about-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 5rem;
+                align-items: center;
+                margin-top: 1rem;
+            }
+            .about-visual {
+                position: relative;
+            }
+            .about-box {
+                background: var(--card-bg);
+                border: 1px solid var(--border);
+                border-radius: 20px;
+                padding: 2.5rem;
+                position: relative;
+            }
+            .about-box::after {
+                content: "";
+                position: absolute;
+                bottom: -20px;
+                right: -20px;
+                width: 120px;
+                height: 120px;
+                border-radius: 20px;
+                border: 1px solid var(--border);
+                z-index: -1;
+            }
+            .visi-misi {
+                margin-top: 2rem;
+            }
+            .vm-item {
+                margin-bottom: 1.8rem;
+            }
+            .vm-item h4 {
+                font-family: "Syne", sans-serif;
+                font-size: 0.85rem;
+                font-weight: 700;
+                color: var(--accent);
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                margin-bottom: 0.5rem;
+            }
+            .vm-item p {
+                color: var(--text-secondary);
+                font-size: 0.95rem;
+            }
+            .values-list {
+                list-style: none;
+                margin-top: 1.5rem;
+            }
+            .values-list li {
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+                padding: 0.8rem 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                color: var(--text-secondary);
+                font-size: 0.92rem;
+            }
+            .values-list li:last-child {
+                border-bottom: none;
+            }
+            .values-list li::before {
+                content: "✦";
+                color: var(--accent);
+                font-size: 0.7rem;
+                margin-top: 5px;
+                flex-shrink: 0;
+            }
+
+            /* ─── WHY US ─── */
+            .why-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+                margin-top: 3.5rem;
+            }
+            .why-card {
+                padding: 1.8rem;
+                border: 1px solid var(--border);
+                border-radius: 14px;
+                background: var(--card-bg);
+            }
+            .why-num {
+                font-family: "Syne", sans-serif;
+                font-size: 3rem;
+                font-weight: 800;
+                color: rgba(0, 201, 167, 0.15);
+                line-height: 1;
+                margin-bottom: 0.8rem;
+            }
+            .why-card h4 {
+                font-family: "Syne", sans-serif;
+                font-weight: 700;
+                color: #fff;
+                margin-bottom: 0.5rem;
+            }
+            .why-card p {
+                font-size: 0.88rem;
+                color: var(--text-secondary);
+            }
+
+            /* ─── CONTACT ─── */
+            .contact-wrap {
+                background: var(--card-bg);
+                border: 1px solid var(--border);
+                border-radius: 24px;
+                padding: 4rem;
+                margin-top: 3rem;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+                align-items: start;
+            }
+            .contact-info h3 {
+                font-family: "Syne", sans-serif;
+                font-size: 1.6rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+                color: #fff;
+            }
+            .contact-detail {
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+                margin-bottom: 1.2rem;
+            }
+            .contact-detail .icon {
+                width: 36px;
+                height: 36px;
+                border-radius: 8px;
+                background: rgba(0, 201, 167, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1rem;
+                flex-shrink: 0;
+            }
+            .contact-detail .txt {
+                font-size: 0.9rem;
+                color: var(--text-secondary);
+            }
+            .contact-detail .txt strong {
+                display: block;
+                color: var(--text-primary);
+                font-weight: 500;
+                font-size: 0.85rem;
+            }
+
+            .contact-form-col h3 {
+                font-family: "Syne", sans-serif;
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #fff;
+                margin-bottom: 1.5rem;
+            }
+            .form-group {
+                margin-bottom: 1.2rem;
+            }
+            .form-group label {
+                display: block;
+                font-size: 0.82rem;
+                color: var(--text-secondary);
+                margin-bottom: 6px;
+                font-weight: 500;
+            }
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                width: 100%;
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(0, 201, 167, 0.15);
+                border-radius: 8px;
+                padding: 0.7rem 1rem;
+                color: var(--text-primary);
+                font-family: "DM Sans", sans-serif;
+                font-size: 0.9rem;
+                transition: border-color 0.2s;
+                -webkit-appearance: none;
+            }
+            .form-group input:focus,
+            .form-group textarea:focus {
+                outline: none;
+                border-color: var(--accent);
+            }
+            .form-group textarea {
+                height: 120px;
+                resize: vertical;
+            }
+            .btn-send {
+                width: 100%;
+                background: var(--accent);
+                color: var(--navy);
+                border: none;
+                padding: 0.9rem;
+                border-radius: 8px;
+                font-family: "Syne", sans-serif;
+                font-weight: 700;
+                font-size: 0.95rem;
+                cursor: pointer;
+                transition: all 0.2s;
+                letter-spacing: 0.02em;
+            }
+            .btn-send:hover {
+                background: #00e6bf;
+            }
+
+            /* ─── FOOTER ─── */
+            footer {
+                padding: 3rem 6%;
+                border-top: 1px solid var(--border);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
+                z-index: 1;
+            }
+            .footer-brand {
+                font-family: "Syne", sans-serif;
+                font-weight: 700;
+                font-size: 0.95rem;
+                color: var(--text-primary);
+            }
+            .footer-copy {
+                font-size: 0.82rem;
+                color: var(--text-muted);
+            }
+            .footer-links {
+                display: flex;
+                gap: 1.5rem;
+                list-style: none;
+            }
+            .footer-links a {
+                color: var(--text-muted);
+                font-size: 0.82rem;
+                text-decoration: none;
+            }
+            .footer-links a:hover {
+                color: var(--accent);
+            }
+
+            /* ─── DIVIDER ─── */
+            .divider {
+                height: 1px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--border),
+                    transparent
+                );
+                margin: 0 6%;
+            }
+
+            /* ─── RESPONSIVE ─── */
+            @media (max-width: 768px) {
+                .about-grid,
+                .contact-wrap {
+                    grid-template-columns: 1fr;
+                    gap: 2rem;
+                }
+                .why-grid {
+                    grid-template-columns: 1fr;
+                }
+                .hero-stats {
+                    position: static;
+                    flex-wrap: wrap;
+                    gap: 2rem;
+                    margin-top: 3rem;
+                }
+                .stat-item {
+                    text-align: left;
+                }
+                nav {
+                    padding: 1rem 4%;
+                }
+                .nav-links {
+                    display: none;
+                }
+                .hero {
+                    padding: 8rem 4% 4rem;
+                }
+                section {
+                    padding: 4rem 4%;
+                }
+                .contact-wrap {
+                    padding: 2rem;
+                }
+                footer {
+                    flex-direction: column;
+                    gap: 1rem;
+                    text-align: center;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ─── NAV ─── -->
+        <nav>
+            <div class="nav-logo">
+                <span class="dot"></span>
+                Insan Nusantara Teknik
+            </div>
+            <ul class="nav-links">
+                <li><a href="#layanan">Layanan</a></li>
+                <li><a href="#tentang">Tentang Kami</a></li>
+                <li><a href="#keunggulan">Keunggulan</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </nav>
+
+        <!-- ─── HERO ─── -->
+        <section class="hero">
+            <div class="hero-orb orb1"></div>
+            <div class="hero-orb orb2"></div>
+
+            <div class="hero-content">
+                <div class="hero-badge">Solusi Teknologi Terpadu</div>
+                <h1>Inovasi Teknik untuk<br /><span>Nusantara</span></h1>
+                <p class="hero-sub">
+                    Kami hadir sebagai mitra teknologi andal — dari pengembangan
+                    web dan keamanan siber, instalasi elektro dan pendingin
+                    udara, hingga implementasi solusi Internet of Things modern.
+                </p>
+                <div class="hero-cta">
+                    <a href="#kontak" class="btn-primary">Hubungi Kami</a>
+                    <a href="#layanan" class="btn-outline">Lihat Layanan</a>
+                </div>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-num">50+</div>
+                    <div class="stat-label">Proyek Selesai</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">40+</div>
+                    <div class="stat-label">Klien Aktif</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">5+</div>
+                    <div class="stat-label">Tahun Pengalaman</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- ─── LAYANAN ─── -->
+        <section id="layanan">
+            <div class="section-tag">Layanan Kami</div>
+            <h2>Solusi Lengkap,<br />Satu Mitra</h2>
+            <p class="section-sub">
+                Kami menawarkan spektrum layanan teknologi yang komprehensif
+                untuk mendukung pertumbuhan bisnis dan operasional Anda.
+            </p>
+
+            <div class="services-grid">
+                <!-- Web Dev -->
+                <div class="service-card" style="--card-accent: #00c9a7">
+                    <a href="profile.html">
+                        <div class="service-icon">🌐</div>
+                        <h3>Web Developer</h3>
+                        <p>
+                            Pengembangan website dan aplikasi web modern yang cepat,
+                            responsif, dan mudah dikelola. Dari landing page hingga
+                            sistem enterprise.
+                        </p>
+                        <div class="service-tags">
+                            <span class="tag">Frontend</span>
+                            <span class="tag">Backend</span>
+                            <span class="tag">CMS</span>
+                            <span class="tag">E-Commerce</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Pentester -->
+                <div class="service-card" style="--card-accent: #ef4444">
+                    <a href="profile.html">
+                        <div
+                            class="service-icon"
+                            style="
+                                background: rgba(239, 68, 68, 0.1);
+                                border-color: rgba(239, 68, 68, 0.2);
+                            "
+                        >
+                            🛡️
+                        </div>
+                        <h3>Penetration Testing</h3>
+                        <p>
+                            Uji keamanan sistem dan jaringan Anda secara menyeluruh.
+                            Identifikasi celah kerentanan sebelum dimanfaatkan pihak
+                            tidak bertanggung jawab.
+                        </p>
+                        <div class="service-tags" style="--accent: #ef4444">
+                            <span
+                                class="tag"
+                                style="
+                                    background: rgba(239, 68, 68, 0.08);
+                                    border-color: rgba(239, 68, 68, 0.2);
+                                    color: #f87171;
+                                "
+                                >Web Pentest</span
+                            >
+                            <span
+                                class="tag"
+                                style="
+                                    background: rgba(239, 68, 68, 0.08);
+                                    border-color: rgba(239, 68, 68, 0.2);
+                                    color: #f87171;
+                                "
+                                >Network Audit</span
+                            >
+                            <span
+                                class="tag"
+                                style="
+                                    background: rgba(239, 68, 68, 0.08);
+                                    border-color: rgba(239, 68, 68, 0.2);
+                                    color: #f87171;
+                                "
+                                >Vulnerability</span
+                            >
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Elektro & AC -->
+                <div class="service-card" style="--card-accent: #f59e0b">
+                    <a href="teknisi.html">
+                        <div
+                            class="service-icon"
+                            style="
+                                background: rgba(245, 158, 11, 0.1);
+                                border-color: rgba(245, 158, 11, 0.2);
+                            "
+                        >
+                            ⚡
+                        </div>
+                        <h3>Teknisi Elektro & AC</h3>
+                        <p>
+                            Instalasi, perawatan, dan perbaikan sistem kelistrikan
+                            serta pendingin udara untuk hunian, perkantoran, dan
+                            industri.
+                        </p>
+                        <div class="service-tags">
+                            <span
+                                class="tag"
+                                style="
+                                    background: rgba(245, 158, 11, 0.08);
+                                    border-color: rgba(245, 158, 11, 0.2);
+                                    color: #fbbf24;
+                                "
+                                >Instalasi Listrik</span
+                            >
+                            <span
+                                class="tag"
+                                style="
+                                    background: rgba(245, 158, 11, 0.08);
+                                    border-color: rgba(245, 158, 11, 0.2);
+                                    color: #fbbf24;
+                                "
+                                >Servis AC</span>
+                            <span
+                                class="tag"
+                                style="
+                                    background: rgba(245, 158, 11, 0.08);
+                                    border-color: rgba(245, 158, 11, 0.2);
+                                    color: #fbbf24;
+                                "
+                                >Panel Kontrol</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- IoT -->
+                <div class="service-card" style="--card-accent: #0ea5e9">
+                    <a href="iot.html">
+                        <div
+                            class="service-icon"
+                            style="
+                                background: rgba(14, 165, 233, 0.1);
+                                border-color: rgba(14, 165, 233, 0.2);
+                            "
+                        >
+                            📡
+                        </div>
+                        <h3>Jasa IoT</h3>
+                        <p>
+                            Implementasi sistem Internet of Things cerdas —
+                            monitoring real-time, otomasi perangkat, dan integrasi
+                            sensor untuk bisnis & smart building.
+                        </p>
+                        <div class="service-tags">
+                            <span
+                                class="tag"
+                                style="
+                                    background: rgba(14, 165, 233, 0.08);
+                                    border-color: rgba(14, 165, 233, 0.2);
+                                    color: #38bdf8;
+                                "
+                                >Smart Home</span
+                            >
+                            <span
+                                class="tag"
+                                style="
+                                    background: rgba(14, 165, 233, 0.08);
+                                    border-color: rgba(14, 165, 233, 0.2);
+                                    color: #38bdf8;
+                                "
+                                >Monitoring</span
+                            >
+                            <span
+                                class="tag"
+                                style="
+                                    background: rgba(14, 165, 233, 0.08);
+                                    border-color: rgba(14, 165, 233, 0.2);
+                                    color: #38bdf8;
+                                "
+                                >Otomasi</span
+                            >
+                            <span
+                                class="tag"
+                                style="
+                                    background: rgba(14, 165, 233, 0.08);
+                                    border-color: rgba(14, 165, 233, 0.2);
+                                    color: #38bdf8;
+                                "
+                                >SCADA</span
+                            >
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- ─── TENTANG ─── -->
+        <section id="tentang">
+            <div class="about-grid">
+                <div class="about-visual">
+                    <div class="about-box">
+                        <div class="section-tag">Tentang Kami</div>
+                        <h2 style="font-size: 2rem">
+                            Insan Nusantara<br />Teknik
+                        </h2>
+                        <p
+                            style="
+                                color: var(--text-secondary);
+                                margin-top: 1rem;
+                                font-size: 0.95rem;
+                                line-height: 1.8;
+                            "
+                        >
+                            Didirikan dengan semangat memajukan teknologi lokal,
+                            Insan Nusantara Teknik hadir sebagai perusahaan jasa
+                            teknologi yang melayani berbagai kebutuhan digital
+                            dan teknis masyarakat Indonesia.
+                        </p>
+                        <p
+                            style="
+                                color: var(--text-secondary);
+                                margin-top: 0.8rem;
+                                font-size: 0.95rem;
+                                line-height: 1.8;
+                            "
+                        >
+                            Kami percaya bahwa teknologi bukan hanya milik
+                            korporasi besar — setiap usaha, dari skala UMKM
+                            hingga industri, berhak mendapatkan solusi teknis
+                            berkualitas tinggi dengan harga yang terjangkau.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <div class="visi-misi">
+                        <div class="vm-item">
+                            <h4>🎯 Visi</h4>
+                            <p>
+                                Menjadi perusahaan teknologi terpercaya yang
+                                mendorong transformasi digital dan kemajuan
+                                teknis di seluruh Nusantara.
+                            </p>
+                        </div>
+                        <div class="vm-item">
+                            <h4>🚀 Misi</h4>
+                            <p>
+                                Menyediakan solusi teknologi yang inovatif,
+                                andal, dan terjangkau — mulai dari ranah
+                                digital, keamanan siber, infrastruktur
+                                elektrikal, hingga ekosistem IoT.
+                            </p>
+                        </div>
+                    </div>
+                    <ul class="values-list">
+                        <li>
+                            Profesionalisme dan integritas dalam setiap
+                            pekerjaan
+                        </li>
+                        <li>
+                            Inovasi berkelanjutan mengikuti perkembangan
+                            teknologi
+                        </li>
+                        <li>Responsif dan berorientasi pada kepuasan klien</li>
+                        <li>Harga transparan tanpa biaya tersembunyi</li>
+                        <li>Garansi pekerjaan dan purna jual</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- ─── KEUNGGULAN ─── -->
+        <section id="keunggulan">
+            <div class="section-tag">Mengapa Kami</div>
+            <h2>Keunggulan Kami</h2>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-num">01</div>
+                    <h4>Tim Bersertifikat</h4>
+                    <p>
+                        Teknisi dan developer kami berpengalaman, bersertifikat,
+                        dan selalu mengikuti perkembangan standar industri
+                        terkini.
+                    </p>
+                </div>
+                <div class="why-card">
+                    <div class="why-num">02</div>
+                    <h4>Layanan End-to-End</h4>
+                    <p>
+                        Dari konsultasi, perancangan, implementasi, hingga
+                        pemeliharaan — semua ditangani dalam satu atap tanpa
+                        kerumitan koordinasi vendor berbeda.
+                    </p>
+                </div>
+                <div class="why-card">
+                    <div class="why-num">03</div>
+                    <h4>Respons Cepat 24/7</h4>
+                    <p>
+                        Tim kami siap merespons kebutuhan darurat teknis Anda
+                        kapan saja, memastikan downtime seminimal mungkin.
+                    </p>
+                </div>
+                <div class="why-card">
+                    <div class="why-num">04</div>
+                    <h4>Solusi Custom</h4>
+                    <p>
+                        Setiap bisnis unik. Kami merancang solusi yang
+                        benar-benar sesuai dengan kebutuhan spesifik Anda, bukan
+                        paket generik satu ukuran.
+                    </p>
+                </div>
+                <div class="why-card">
+                    <div class="why-num">05</div>
+                    <h4>Harga Kompetitif</h4>
+                    <p>
+                        Kualitas enterprise dengan harga yang ramah di kantong.
+                        Kami berkomitmen pada transparansi biaya sejak awal
+                        diskusi.
+                    </p>
+                </div>
+                <div class="why-card">
+                    <div class="why-num">06</div>
+                    <h4>Garansi & Purna Jual</h4>
+                    <p>
+                        Setiap pekerjaan dilengkapi garansi tertulis. Kami tidak
+                        sekadar mengerjakan, tapi memastikan hasilnya bekerja
+                        baik jangka panjang.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- ─── KONTAK ─── -->
+        <section id="kontak">
+            <div class="section-tag">Kontak</div>
+            <h2>Ayo Berkolaborasi</h2>
+            <p class="section-sub">
+                Ceritakan kebutuhan teknis Anda kepada kami. Konsultasi pertama
+                gratis, tanpa kewajiban.
+            </p>
+
+            <div class="contact-wrap">
+                <div class="contact-info">
+                    <h3>Hubungi Kami</h3>
+                    <p
+                        style="
+                            color: var(--text-secondary);
+                            font-size: 0.9rem;
+                            margin-bottom: 2rem;
+                            line-height: 1.8;
+                        "
+                    >
+                        Kami dengan senang hati menjawab pertanyaan Anda dan
+                        memberikan estimasi harga yang transparan untuk
+                        kebutuhan proyek Anda.
+                    </p>
+
+                    <div class="contact-detail">
+                        <div class="icon">📍</div>
+                        <div class="txt">
+                            <strong>Alamat</strong>Semarang, Jawa Tengah,
+                            Indonesia
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="icon">📱</div>
+                        <div class="txt">
+                            <strong>WhatsApp</strong>+62 xxx-xxxx-xxxx
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="icon">✉️</div>
+                        <div class="txt">
+                            <strong>Email</strong>info@insannusantarateknik.com
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="icon">🕐</div>
+                        <div class="txt">
+                            <strong>Jam Operasional</strong>Senin – Sabtu, 08.00
+                            – 17.00 WIB
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-col">
+                    <h3>Kirim Pesan</h3>
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" placeholder="Masukkan nama Anda" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email / WhatsApp</label>
+                        <input
+                            type="text"
+                            placeholder="Email atau nomor WhatsApp"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Layanan yang Dibutuhkan</label>
+                        <select>
+                            <option value="">Pilih layanan...</option>
+                            <option>Web Developer</option>
+                            <option>Penetration Testing</option>
+                            <option>Teknisi Elektro & AC</option>
+                            <option>Jasa IoT</option>
+                            <option>Konsultasi Umum</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi Kebutuhan</label>
+                        <textarea
+                            placeholder="Ceritakan proyek atau masalah teknis Anda..."
+                        ></textarea>
+                    </div>
+                    <button class="btn-send">Kirim Pesan →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── FOOTER ─── -->
+        <footer>
+            <div class="footer-brand">© 2025 Insan Nusantara Teknik</div>
+            <ul class="footer-links">
+                <li><a href="#layanan">Layanan</a></li>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+            <div class="footer-copy">Dibuat dengan ❤ untuk Indonesia</div>
+        </footer>
+
+        <script>
+            document
+                .querySelector(".btn-send")
+                .addEventListener("click", function () {
+                    const name =
+                        document.querySelector('input[type="text"]').value;
+                    if (!name.trim()) {
+                        alert("Mohon isi nama Anda terlebih dahulu.");
+                        return;
+                    }
+                    this.textContent = "✓ Pesan Terkirim!";
+                    this.style.background = "#10b981";
+                    setTimeout(() => {
+                        this.textContent = "Kirim Pesan →";
+                        this.style.background = "";
+                    }, 3000);
+                });
+
+            document.querySelectorAll('a[href^="#"]').forEach((a) => {
+                a.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const target = document.querySelector(
+                        a.getAttribute("href"),
+                    );
+                    if (target)
+                        target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                        });
+                });
+            });
+        </script>
+    </body>
+</html>
